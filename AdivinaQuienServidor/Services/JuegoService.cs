@@ -30,6 +30,12 @@ namespace AdivinaQuienServidor.Services
         public event Action? EsperandoRespuesta;
         public event Action? ClienteAdivino, CambioTurno;
         public event Action<bool, string?, string?>? Gano;
+        public void Cerrar()
+        {
+            Cliente.Close();
+            Cliente = null;
+            salaAbierta = false;
+        }
         public void AbrirSala()
         {
             if (!salaAbierta)
@@ -189,7 +195,7 @@ namespace AdivinaQuienServidor.Services
                 {
                     Nombre = NombreComando.FinalizarPartida,
                     NombreJugador = NombreServidor,
-                    PersonajeNombre = nombre
+                    PersonajeNombre = MiPersonaje
                 };
                 EnviarComando(comando, Cliente);
                 Gano?.Invoke(true, NombreCliente, PersonajeCliente);

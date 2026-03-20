@@ -81,6 +81,7 @@ namespace AdivinaQuien.ViewModels
         public ICommand PreguntarCommand { get; set; }
         public ICommand OcultarCommand { get; set; }
         public ICommand AdivinarCommand { get; set; }
+        public ICommand VolverCommand { get; set; }
 
         Dispatcher hiloUI;
 
@@ -442,6 +443,7 @@ namespace AdivinaQuien.ViewModels
             PreguntarCommand = new RelayCommand(Preguntar);
             OcultarCommand = new RelayCommand<Personaje>(Ocultar);
             AdivinarCommand = new RelayCommand<string>(Adivinar);
+            VolverCommand = new RelayCommand(Volver);
 
 
 
@@ -456,6 +458,14 @@ namespace AdivinaQuien.ViewModels
             clienteService.CambioTurno += ClienteService_CambioTurno;
             clienteService.Rechazado += ClienteService_Rechazado;
             clienteService.JugadorConectado += ClienteService_JugadorConectado;
+        }
+
+        private void Volver()
+        {
+            clienteService.Desconectar();
+            MensajeError = "";
+            OnPropertyChanged(nameof(MensajeError));
+            VistaActual = Vista.Conexion;
         }
 
         private void ClienteService_JugadorConectado()
@@ -480,9 +490,15 @@ namespace AdivinaQuien.ViewModels
         {
             ServidorNombre = $"El personaje de {arg2} era:";
             if (arg1)
+            {
+                Perdio = "Collapsed";
                 Gano = "Visible";
+            }
             else
+            {
+                Gano = "Collapsed";
                 Perdio = "Visible";
+            }
 
             var personaje = Person.FirstOrDefault(x => x.Nombre == arg3);
             PersonajeEnemigo = new()
@@ -557,12 +573,15 @@ namespace AdivinaQuien.ViewModels
 
         private void Preguntar()
         {
-            TurnoPreguntar = false;
-            PuedeAdivinar = false;
+            if(!string.IsNullOrEmpty(Pregunta))
+            {
+                TurnoPreguntar = false;
+                PuedeAdivinar = false;
 
-            clienteService.EnviarPregunta(Pregunta);
-            Pregunta = "";
-
+                clienteService.EnviarPregunta(Pregunta);
+                Pregunta = "";
+                OnPropertyChanged(nameof(Preguntar));
+            }
         }
 
         private void Responder(string? obj)

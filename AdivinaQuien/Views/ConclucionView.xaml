@@ -22,6 +22,19 @@
                     <Border Grid.Column="1" BorderThickness="2" Height="260" Width="260" BorderBrush="Black" Background="Black" CornerRadius="10" Margin="10">
                         <Image HorizontalAlignment="Center" Source="{Binding PersonajeEnemigo.Imagen}" Height="250" Width="250" Stretch="Fill" Margin="5"/>
                     </Border>
+                    <Button Command="{Binding VolverCommand}" HorizontalAlignment="Center" Width="250" Content="Cerrar" FontSize="20" Margin="10" Foreground="White" VerticalAlignment="Bottom">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#FF3838" Offset="1"/>
+                                <GradientStop Color="#050E3C" Offset="0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10,10,10,10"></Setter>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </StackPanel>
             </DockPanel>
         </Border>
@@ -40,6 +53,19 @@
                     <Border Grid.Column="1" BorderThickness="2" Height="260" Width="260" BorderBrush="Black" Background="Black" CornerRadius="10" Margin="10">
                         <Image HorizontalAlignment="Center" Source="{Binding PersonajeEnemigo.Imagen}" Height="250" Width="250" Stretch="Fill" Margin="5"/>
                     </Border>
+                    <Button Command="{Binding VolverCommand}" HorizontalAlignment="Center" Width="250" Content="Cerrar" FontSize="20" Margin="10" Foreground="White" VerticalAlignment="Bottom">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#FF3838" Offset="1"/>
+                                <GradientStop Color="#050E3C" Offset="0"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10,10,10,10"></Setter>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </StackPanel>
             </DockPanel>
         </Border>

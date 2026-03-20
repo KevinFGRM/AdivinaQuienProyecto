@@ -26,6 +26,11 @@ namespace AdivinaQuien.Services
         public event Action? ServidorAdivino, CambioTurno, Rechazado;
         public event Action<bool, string?, string?>? Gano;
 
+        public void Desconectar()
+        {
+            tcpClient.Close();
+            tcpClient = null;
+        }
         public void Conectar(IPAddress ip, string nombre)
         {
             if (tcpClient == null)
@@ -135,10 +140,11 @@ namespace AdivinaQuien.Services
                                         }
                                         else
                                         {
-                                            Gano?.Invoke(false, finalizado.NombreJugador, UltimoIntento);
+                                            Gano?.Invoke(false, finalizado.NombreJugador, finalizado.PersonajeNombre);
                                         }
                                         break;
                                     case NombreComando.NoAdivino:
+                                        UltimoIntento = null;
                                         Historial?.Invoke($"{Nombre}: Adivino erroneamente al personaje {UltimoIntento}");
                                         break;
                                     case NombreComando.Rechazar:

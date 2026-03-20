@@ -22,7 +22,6 @@ namespace AdivinaQuienServidor.Views
         public ConectarView()
         {
             InitializeComponent();
-            IniciarTimer();
         }
         private DispatcherTimer timer;
         private void IniciarTimer()
@@ -112,6 +111,11 @@ namespace AdivinaQuienServidor.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             DetenerTimer();
+        }
+
+        private void Carrusel_Loaded(object sender, RoutedEventArgs e)
+        {
+            IniciarTimer();
         }
     }
 }

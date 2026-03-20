@@ -76,7 +76,7 @@ namespace AdivinaQuienServidor.ViewModels
         public ICommand PreguntarCommand { get; set; }
         public ICommand OcultarCommand { get; set; }
         public ICommand AdivinarCommand { get; set; }
-
+        public ICommand VolverCommand { get; set; }
 
 
         public JuegoViewModel()
@@ -438,6 +438,7 @@ namespace AdivinaQuienServidor.ViewModels
             PreguntarCommand = new RelayCommand(Preguntar);
             OcultarCommand = new RelayCommand<Personaje>(Ocultar);
             AdivinarCommand = new RelayCommand<string>(Adivinar);
+            VolverCommand = new RelayCommand(Volver);
 
 
             juegoService.ClienteConectar += JuegoService_ClienteConectar;
@@ -447,6 +448,14 @@ namespace AdivinaQuienServidor.ViewModels
             juegoService.ClienteAdivino += JuegoService_ClienteAdivino;
             juegoService.Gano += JuegoService_Gano;
             juegoService.CambioTurno += JuegoService_CambioTurno;
+        }
+
+        private void Volver()
+        {
+            juegoService.Cerrar();
+            MensajeError = "";
+            OnPropertyChanged(nameof(MensajeError));
+            VistaActual = Vista.Conexion;
         }
 
         private void JuegoService_CambioTurno()
@@ -532,11 +541,15 @@ namespace AdivinaQuienServidor.ViewModels
         }
         private void Preguntar()
         {
-            TurnoPreguntar = false;
-            PuedeAdivinar = false;
+            if(!string.IsNullOrEmpty(Pregunta))
+            {
+                TurnoPreguntar = false;
+                PuedeAdivinar = false;
 
-            juegoService.EnviarPregunta(Pregunta);
-            Pregunta = "";
+                juegoService.EnviarPregunta(Pregunta);
+                Pregunta = "";
+                OnPropertyChanged(nameof(Preguntar));
+            }
         }
 
         private void Responder(string? obj)

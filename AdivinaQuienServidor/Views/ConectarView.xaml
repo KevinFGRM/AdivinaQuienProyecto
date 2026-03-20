@@ -75,7 +75,7 @@
                 </DockPanel>
             </Border>
             <Border Grid.Column="1" BorderThickness="2" BorderBrush="Black" Background="Black" CornerRadius="10" Margin="10">
-                <Image  x:Name="Carrusel" MinWidth="300" Stretch="Fill" Margin="5"/>
+                <Image Loaded="Carrusel_Loaded" x:Name="Carrusel" MinWidth="300" Stretch="Fill" Margin="5"/>
             </Border>
         </Grid>
     </Grid>
