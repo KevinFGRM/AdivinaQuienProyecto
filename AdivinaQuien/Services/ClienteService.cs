@@ -30,6 +30,10 @@ namespace AdivinaQuien.Services
         {
             tcpClient.Close();
             tcpClient = null;
+            Nombre = null;
+            ServidorNombre = null;
+            MiPersonaje = null;
+            ServidorEligioPersonaje = false;
         }
         public void Conectar(IPAddress ip, string nombre)
         {

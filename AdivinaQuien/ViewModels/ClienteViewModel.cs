@@ -464,7 +464,16 @@ namespace AdivinaQuien.ViewModels
         {
             clienteService.Desconectar();
             MensajeError = "";
+            PuedeAdivinar = false;
+            TurnoResponder = false;
+            turnoPreguntar = false;
+            DesHabilitarTodo = true;
+            EsperarConexion = "Collapsed";
+            MensajesJuego = [];
+            PersonajeEnemigo = null;
+            PersonajeSeleccionado = null;
             OnPropertyChanged(nameof(MensajeError));
+            OnPropertyChanged(nameof(EsperarConexion));
             VistaActual = Vista.Conexion;
         }
 
@@ -580,7 +589,7 @@ namespace AdivinaQuien.ViewModels
 
                 clienteService.EnviarPregunta(Pregunta);
                 Pregunta = "";
-                OnPropertyChanged(nameof(Preguntar));
+                OnPropertyChanged(nameof(Pregunta));
             }
         }
 

@@ -35,6 +35,11 @@ namespace AdivinaQuienServidor.Services
             Cliente.Close();
             Cliente = null;
             salaAbierta = false;
+            NombreCliente = null;
+            NombreServidor = null;
+            PersonajeCliente = null;
+            MiPersonaje = null;
+            Servidor.Stop();
         }
         public void AbrirSala()
         {

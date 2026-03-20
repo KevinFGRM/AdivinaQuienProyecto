@@ -454,7 +454,18 @@ namespace AdivinaQuienServidor.ViewModels
         {
             juegoService.Cerrar();
             MensajeError = "";
+            PuedeAdivinar = false;
+            TurnoResponder = false;
+            turnoPreguntar = false;
+            DesHabilitarTodo = false;
+            PersonajeSeleccionado = null;
+            PersonajeEnemigo = null;
+            EsperarConexion = "Visible";
+            MensajesJuego = [];
+
             OnPropertyChanged(nameof(MensajeError));
+            OnPropertyChanged(nameof(EsperarConexion));
+
             VistaActual = Vista.Conexion;
         }
 
@@ -514,6 +525,7 @@ namespace AdivinaQuienServidor.ViewModels
                 OnPropertyChanged(nameof(VistaActual));
                 OnPropertyChanged(nameof(Turno));
             }
+            DesHabilitarTodo = true;
         }
 
         private void JuegoService_Historial(string obj)
@@ -548,7 +560,7 @@ namespace AdivinaQuienServidor.ViewModels
 
                 juegoService.EnviarPregunta(Pregunta);
                 Pregunta = "";
-                OnPropertyChanged(nameof(Preguntar));
+                OnPropertyChanged(nameof(Pregunta));
             }
         }
 
@@ -611,6 +623,8 @@ namespace AdivinaQuienServidor.ViewModels
                 OnPropertyChanged(nameof(NombreJugador2));
                 OnPropertyChanged(nameof(EsperarConexion));
                 OnPropertyChanged(nameof(ActivarSeleccion));
+                DesHabilitarTodo = true;
+
             });
         }
 
