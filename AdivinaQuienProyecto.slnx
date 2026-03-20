@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="AdivinaQuien/AdivinaQuien.csproj" />
+  <Project Path="AdivinaQuienServidor/AdivinaQuienServidor.csproj" Id="587f736a-1284-487d-a2a3-2fda30607105" />
+</Solution>
